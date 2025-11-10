@@ -1,0 +1,366 @@
+<?php
+/**
+ * The header for our theme.
+ *
+ * Displays all of the <head> section and everything up till <div id="content">
+ *
+ * @package understrap
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
+$container = get_theme_mod( 'understrap_container_type' );
+?>
+<!DOCTYPE html>
+<html <?php language_attributes(); ?>>
+<head>
+
+	<meta charset="<?php bloginfo( 'charset' ); ?>">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ffc500">
+	<meta name="theme-color" content="#ffc500">
+
+	<!-- Google Tag Manager -->
+	<!-- <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-NNC5N47');</script> -->
+	<!-- End Google Tag Manager -->
+
+	<link rel="preload" as="style" href="<?php bloginfo('template_directory'); ?>/css/font-face.min.css" crossorigin="anonymous" onload="this.rel='stylesheet'"> 
+
+	<link rel="preload" as="style" href="<?php bloginfo('template_directory'); ?>/css/font-awesome.min.css" crossorigin="anonymous" onload="this.rel='stylesheet'">
+
+	<link rel="preload" as="style" href="<?php bloginfo('template_directory'); ?>/css/accordion.css" crossorigin="anonymous" onload="this.rel='stylesheet'">
+
+	
+
+	<?php wp_head(); ?>
+
+	<?php $script_path = get_template_directory().'/js/menzies.min.js'; ?>
+	<script src="https://kit.fontawesome.com/dee7463b98.js" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="/wp-content/themes/menziestheme/js/accordion.js"></script>
+
+
+	<script type="text/javascript" src="<?php bloginfo('template_directory'); ?>/js/menzies.min.js?v=<?php echo filemtime($script_path); ?>"/></script>
+
+	<!-- HTML5 Speech Recognition API -->
+	<script>
+	function startDictation() {
+
+	    if (window.hasOwnProperty('webkitSpeechRecognition')) {
+
+	      	var recognition = new webkitSpeechRecognition();
+
+	      	recognition.continuous = false;
+	      	recognition.interimResults = false;
+
+	      	recognition.lang = "en-GB";
+	      	recognition.start();
+
+	      	recognition.onresult = function(e) {
+	        	document.getElementById('transcript').value
+	                                 = e.results[0][0].transcript;
+	        	recognition.stop();
+	        	document.getElementById('labnol').submit();
+	      	};
+
+	      	recognition.onerror = function(e) {
+	        	recognition.stop();
+	      	}
+	    }
+	}
+	</script>
+
+	<script type="text/javascript" src="/wp-content/themes/menziestheme/js/span-removal.js"></script> 
+	<script type="text/javascript" src="/wp-content/themes/menziestheme/js/tabs.js"></script> 
+	<script type="text/javascript" src="/wp-content/themes/menziestheme/js/edit.js"></script>
+
+</head>
+
+<body <?php body_class(); ?>>
+
+<?php if ( function_exists( 'gtm4wp_the_gtm_tag' ) ) { gtm4wp_the_gtm_tag(); } ?>
+
+<div class="site" id="page">
+
+	<!-- ******************* The Navbar Area ******************* -->
+	<div id="wrapper-navbar" itemscope itemtype="http://schema.org/WebSite">
+
+		<a class="skip-link sr-only sr-only-focusable" href="#content"><?php esc_html_e( 'Skip to content', 'understrap' ); ?></a>
+
+		<div class="header-topbar-wrap">
+
+			<div class="container header-topbar-container">
+
+				<div class="row header-topbar-row">
+
+					<div class="col-12 header-topbar-col">
+
+						<div class="header-topbar">
+
+							<ul id="mini-nav" class="navbar-nav ml-auto">
+
+								<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" id="menu-item-200" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children dropdown mini-nav-item mini-nav-search">
+
+									<a href="#" data-toggle="modal" data-target="#searchmodal"><span class="top-head-text"><i class="fa fa-search" aria-hidden="true"></i><span class="search-words"><?php _e( ' Search', 'menziestheme'); ?></span></span></a>
+
+								</li>
+
+								<?php if( have_rows('mini_nav_items', 'option') ) : ?>
+
+									<?php $mini_nav_count = 101; ?>
+
+									<?php while ( have_rows('mini_nav_items', 'option') ) : the_row(); ?>
+
+										<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" id="menu-item-<?php echo $mini_nav_count; ?>" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children dropdown menu-item-<?php echo $mini_nav_count; ?> mini-nav-item">
+
+											<?php $mini_nav_title = get_sub_field('title'); ?>
+
+											<?php if( have_rows('child_items', 'option') ): ?>
+
+												<?php // the_sub_field('icon'); ?> <span class="top-head-text dark"><?php echo $mini_nav_title; ?></span>
+
+												<div class="mini-dropdown dropdown-menu" aria-labelledby="menu-item-dropdown-<?php echo $mini_nav_count; ?>" role="menu">
+
+												  	<?php while ( have_rows('child_items', 'option') ) : the_row(); ?>
+
+													<div itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" class="menu-item menu-item-type-custom menu-item-object-custom nav-item">
+														<a title="All insights" href="<?php the_sub_field('link'); ?>" class="dropdown-item"><?php the_sub_field('title'); ?></a>
+													</div>
+
+													<?php endwhile;?> 
+
+												</div>
+
+											<?php else: ?>
+
+												<a href="<?php the_sub_field('link'); ?>">
+													<?php // the_sub_field('icon'); ?> <span class="top-head-text"><?php the_sub_field('title'); ?></span>
+												</a>
+
+											<?php endif;  ?>
+
+										</li>
+
+										<?php $mini_nav_count++; ?>
+
+									<?php endwhile; ?>
+
+								<?php endif; ?>
+
+								<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" id="menu-item-201" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children dropdown mini-nav-item mini-nav-search">
+
+									<a href="https://portal.menzies.co.uk/" target="_blank"><span class="top-head-text"><i class="fa fa-user-circle-o" aria-hidden="true"></i><span class="search-words"><?php _e( ' Client portal', 'menziestheme'); ?></span></span></a>
+
+								</li> 
+
+							</ul>
+
+							<div class="header-socials">
+
+								<?php // check if the repeater field has rows of data
+								if( have_rows('social', 'option') ): ?>
+
+									<ul class="social-list">
+
+					 					<?php 
+					 					// loop through the rows of data
+					    				while ( have_rows('social', 'option') ) : the_row();
+
+					   					$social_network_icon = get_sub_field('social_network');
+					   					$social_network_url = get_sub_field('network_url');
+
+					   					$social_network_field = get_field_object('social_network');
+										$social_network_value = get_field('social_network');
+										// $social_network_label = get_sub_field('social_network')['label'];
+
+					        			// display a sub field value ?>
+					        			<li class="social-item">
+						        			<a href="<?php echo $social_network_url; ?>" target="_blank">
+							        			<div class="contact-social-icon">
+								        			<?php echo $social_network_icon; ?> 
+								        		</div>
+							        		</a>
+					        			</li>
+
+					    				<?php endwhile; ?>
+
+									</ul>
+
+								<?php else :
+
+								// no rows found
+
+								endif;
+
+								?>
+
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+				
+			</div>
+
+		</div>
+
+		<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+
+		<?php if ( 'container' == $container ) : ?>
+			<div class="container">
+		<?php endif; ?>
+
+				<a class="navbar-brand" rel="home" href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" itemprop="url">
+
+					<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/Menzies_Logo_Small_GreyOrange.svg" class="svg-logo" onerror="this.src='<?php echo get_stylesheet_directory_uri(); ?>/images/Menzies_Logo_Small_GreyOrange.png'" alt="Menzies LLP - Financial Management and Accounting Services Firm">
+
+				</a>
+
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="<?php esc_attr_e( 'Toggle navigation', 'understrap' ); ?>">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<!-- The WordPress Menu goes here -->
+
+				<div id="navbarNavDropdown" class="menzies-nav collapse navbar-collapse">
+
+					<?php if( have_rows('navigation_items', 'option') ): ?>
+
+						<ul id="main-menu" class="navbar-nav ml-auto">
+
+							<?php $nav_parent_count = 1; ?>
+
+							<?php while( have_rows('navigation_items', 'option') ) : the_row(); ?>
+
+								<?php if (get_sub_field('item_type') == 'simple') : ?>
+
+									<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" id="menu-item-<?php echo $nav_parent_count; ?>" class="menu-item menu-item-<?php echo $nav_parent_count; ?> nav-item">
+
+										<a title="<?php the_sub_field('text'); ?>" href="<?php if (get_sub_field('link')) { the_sub_field('link'); } else { echo '#'; } ?>" class="nav-link"><?php the_sub_field('text'); ?></a>
+
+									</li>
+
+								<?php elseif (get_sub_field('item_type') == 'services'): ?>
+
+									<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" id="menu-item-<?php echo $nav_parent_count; ?>" class="menu-item menu-item-<?php echo $nav_parent_count; ?> mega-toggle menu-item-has-children dropdown  nav-item">
+
+										<a title="<?php the_sub_field('text'); ?>" href="/services/" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle nav-link" id="menu-item-dropdown-<?php echo $nav_parent_count; ?>"><?php the_sub_field('text'); ?></a>
+
+										<a title="<?php the_sub_field('text'); ?>" href="/services/" class="mobile-nav-link nav-link"><?php the_sub_field('text'); ?></a>
+
+										<div class="mega-panel dropdown-menu" style="display: none;"><div class="container"><div class="row load"><div class="col-md-12"><div class="mega-panel-holder">
+
+											<?php get_template_part( 'section-templates/section', 'service-nav' ); ?>
+
+										</div></div></div></div></div>
+
+									</li>
+
+								<?php elseif (get_sub_field('item_type') == 'sectors'): ?>
+
+									<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" id="menu-item-<?php echo $nav_parent_count; ?>" class="menu-item menu-item-<?php echo $nav_parent_count; ?> mega-toggle menu-item-has-children dropdown  nav-item">
+
+										<a title="<?php the_sub_field('text'); ?>" href="/sectors/" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle nav-link" id="menu-item-dropdown-<?php echo $nav_parent_count; ?>"><?php the_sub_field('text'); ?></a>
+
+										<a title="<?php the_sub_field('text'); ?>" href="/sectors/" class="mobile-nav-link nav-link"><?php the_sub_field('text'); ?></a>
+
+										<div class="mega-panel dropdown-menu" style="display: none;"><div class="container"><div class="row load"><div class="col-md-12"><div class="mega-panel-holder">
+
+											<?php get_template_part( 'section-templates/section', 'sectors-nav' ); ?>
+
+										</div></div></div></div></div>
+
+									</li>
+
+									<?php elseif (get_sub_field('item_type') == 'careers'): ?>
+
+										<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" id="menu-item-<?php echo $nav_parent_count; ?>" class="menu-item menu-item-<?php echo $nav_parent_count; ?> mega-toggle menu-item-has-children dropdown  nav-item">
+
+											<a title="<?php the_sub_field('text'); ?>" href="/career/" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle nav-link" id="menu-item-dropdown-<?php echo $nav_parent_count; ?>"><?php the_sub_field('text'); ?></a>
+
+											<a title="<?php the_sub_field('text'); ?>" href="/career/" class="mobile-nav-link nav-link"><?php the_sub_field('text'); ?></a>
+
+											<div class="mega-panel dropdown-menu" style="display: none;"><div class="container"><div class="row load"><div class="col-md-12"><div class="mega-panel-holder">
+
+												<?php get_template_part( 'section-templates/section', 'careers-nav' ); ?>
+
+											</div></div></div></div></div>
+
+										</li>
+
+								<?php elseif (get_sub_field('item_type') == 'insights'): ?>
+
+									<li itemscope="itemscope" itemtype="https://www.schema.org/SiteNavigationElement" id="menu-item-<?php echo $nav_parent_count; ?>" class="menu-item menu-item-<?php echo $nav_parent_count; ?> mega-toggle menu-item-has-children dropdown  nav-item">
+
+										<a title="<?php the_sub_field('text'); ?>" href="/insights/" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle nav-link" id="menu-item-dropdown-<?php echo $nav_parent_count; ?>"><?php the_sub_field('text'); ?></a>
+
+										<a title="<?php the_sub_field('text'); ?>" href="/insights/" class="mobile-nav-link nav-link"><?php the_sub_field('text'); ?></a>
+
+										<div class="mega-panel dropdown-menu" style="display: none;"><div class="container"><div class="row load"><div class="col-md-12"><div class="mega-panel-holder">
+
+											<?php get_template_part( 'section-templates/section', 'insights-nav' ); ?>
+
+										</div></div></div></div></div>
+
+									</li>
+
+								<?php endif; ?>
+
+								<?php $nav_parent_count++; ?>
+
+							<?php endwhile; ?>
+
+						</ul>
+
+					<?php endif; ?>
+
+				</div>
+
+
+			<?php if ( 'container' == $container ) : ?>
+			</div><!-- .container -->
+			<?php endif; ?>
+
+		</nav><!-- .site-navigation -->
+
+	</div><!-- #wrapper-navbar end -->
+
+	<!-- Modal -->
+	<div class="modal fade" id="searchmodal" tabindex="-1" role="dialog" aria-labelledby="searchmodalLabel" aria-hidden="true">
+
+	  <div class="modal-dialog modal-lg" role="document">
+
+	    <div class="modal-content">
+	     
+	      <div class="modal-body">
+
+	        <form id="labnol" action="<?php echo home_url(); ?>" method="get">
+
+	        	<div class="search-intro-text search-intro-text-modal">
+
+					Search or ask a question:
+
+				</div>
+
+			    <div class="speech">
+			    	<input type="text" name="s" value="" id="transcript" placeholder="Start typing.." data-swplive="true" /> <!-- data-swplive="true" enables SearchWP Live Search! -->
+			    	<a onclick="startDictation()" onTouchTap="startDictation()" ontouchstart="startDictation()" class="search-mic-icon" alt="search mic" style="cursor:pointer;"><i class="fa fa-microphone" aria-hidden="true"></i></a><input type="submit" class="search-submit">
+			    </div>
+
+			</form>
+
+	      </div>
+
+	    </div>
+
+	  </div>
+
+	</div>

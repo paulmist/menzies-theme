@@ -1,0 +1,196 @@
+<?php
+
+/**
+ * The template for displaying all single posts.
+ *
+ * @package understrap
+ */
+
+if (!defined('ABSPATH')) {
+	exit; // Exit if accessed directly.
+}
+
+get_header();
+$container = get_theme_mod('understrap_container_type');
+$author_objects = get_field('author'); // Retrieve authors (assuming 'author' is a post object field)
+
+while (have_posts()) : the_post();
+
+	$has_hero = "no-hero";
+	if (has_post_thumbnail()) {
+		$featured_img_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
+	}
+	if ($featured_img_url) {
+		$has_hero = "yes-hero";
+	}
+	$category = get_the_category();
+	$first_category = $category[0];
+?>
+
+	<main class="site-main" id="main">
+
+		<div class="pageHeader animatable fadeInDown animationDelayone">
+			<div class="<?php if ($inner_page_header['centred_text']) : echo 'pageHeaderCenter';
+						endif; ?> p-t-xlarge p-b-medium animatable fadeInDown animationDelayone">
+				<?php
+				$categories = get_the_category();
+				if (!empty($categories)) {
+					echo '<div class="post-categories">';
+					echo '<span class="post-category-tag">' . esc_html($categories[0]->name) . '</span>';
+					echo '</div>';
+				}
+				?>
+				<?php the_title('<h1 class="entry-title ">', '</h1>'); ?>
+				<div class="post-meta-container">
+					<div class="post-meta">
+						<?php the_date('jS F Y'); ?>
+					</div>
+					<div class="post-meta">
+						<span class="read-time"><?php echo get_read_time(); ?></span>
+					</div>
+				</div>
+
+			</div>
+			<div class="home-header-graphic box home-header-graphic-inner" data-scroll-speed="3" style="top: 0px; opacity: 1;">
+
+				<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 605.5 600.1">
+					<g class="fadeInRight animationDelayone box animated">
+						<path d="m400.5,166.6h-118.6V48l118.6,118.6Zm-116.6-2h111.8l-111.8-111.8v111.8Z" style="fill:#50544b; stroke-width:0px;"></path>
+					</g>
+					<g class="fadeInDown animationDelaytwo box animated">
+						<path d="m453,152.5L300.6,0h304.9l-152.5,152.5ZM305.4,2l147.6,147.6L600.7,2h-295.3Z" style="fill:#fff; stroke-width:0px;"></path>
+					</g>
+					<g class="fadeInUp animationDelaythree box animated">
+						<polygon points="278.3 265.2 340.7 265.2 340.7 327.6 278.3 265.2" style="fill:#48494c; stroke-width:0px;"></polygon>
+					</g>
+					<g class="fadeInUp animationDelayfour box animated">
+						<polygon points="539.7 107.6 602.1 107.6 602.1 170 539.7 107.6" style="fill:#48494c; stroke-width:0px;"></polygon>
+					</g>
+					<g class="fadeInLeft animationDelayfive box animated">
+						<polygon points="336.5 198.9 554.2 198.9 554.2 416.5 336.5 198.9" style="fill:#da9b00; stroke-width:0px; opacity: 0.3;"></polygon>
+					</g>
+					<g class="fadeInLeft animationDelaysix box animated">
+						<polygon points="602.2 281.9 602.2 600.1 284 600.1 602.2 281.9" style="fill:#da9b00; stroke-width:0px; opacity: 0.3;"></polygon>
+					</g>
+					<g class="fadeInRight animationDelayseven box animated">
+						<path d="m114.3,596.2L0,481.9h228.5l-114.3,114.3ZM4.8,483.9l109.4,109.4,109.4-109.4H4.8Z" style="fill:#50544b; stroke-width:0px;"></path>
+					</g>
+					<g class="fadeInUp animationDelayeight box animated">
+						<path d="m185.1,599v-214.2h214.2l-214.2,214.2Zm2-212.2v207.4l207.4-207.4h-207.4Z" style="fill:#fff; stroke-width:0px;"></path>
+					</g>
+				</svg>
+
+				<script>
+					jQuery(function($) {
+						var boxes = $('.box'),
+							$window = $(window);
+
+						$window.scroll(function() {
+							var scrollTop = $window.scrollTop();
+							boxes.each(function() {
+								var $this = $(this),
+									scrollspeed = parseInt($this.data('scroll-speed')),
+									val = -scrollTop / scrollspeed,
+									opacity = 1 - scrollTop / (scrollspeed * 200);
+
+								$this.css({
+									'top': val + 'px',
+									'opacity': opacity
+								});
+							});
+						});
+					});
+				</script>
+
+			</div>
+		</div>
+
+		<article <?php post_class($has_hero); ?> id="post-<?php the_ID(); ?>">
+
+			<div class="wrapper" id="single-wrapper">
+
+				<div class="<?php echo esc_attr($container); ?>" id="content" tabindex="-1">
+
+					<div class="row">
+
+
+
+						<div class="entry-content post-entry-content">
+							<?php the_content(); ?>
+							<?php if (function_exists('pf_show_link')) {
+								echo pf_show_link();
+							} ?>
+							<?php
+							$author_post = get_field('author');
+
+							if ($author_post && get_post_status($author_post->ID) === 'publish') :
+								$author_name = get_the_title($author_post->ID);
+								$big_image = get_field('big_image', $author_post->ID);
+								$position = get_field('position', $author_post->ID);
+								$author_link = get_permalink($author_post->ID);
+							?>
+								<div class="flexBox alignCenter justifyCenter flexDirColumn">
+									<h2 class="modTitle">Contact Our <span class="yellow">Experts</span></h2>
+									<div class="author author-100 flexBox alignCenter justifyCenter p-b-medium">
+										<div class="author-image-wrapper fadeInUp animationDelayone animatable">
+											<div class="author__image">
+												<?php if ($big_image) : ?>
+													<img src="<?php echo esc_url($big_image['url']); ?>" alt="<?php echo esc_attr($big_image['alt']); ?>" />
+												<?php endif; ?>
+											</div>
+										</div>
+										<div class="author__details fadeInUp animationDelaytwo animatable">
+											<?php if ($position) : ?>
+												<h4 class="author__job-title subTitle yellow"><?php echo esc_html($position); ?></h4>
+											<?php endif; ?>
+											<?php if ($author_name) : ?>
+												<h2 class="secondTitle"><?php echo esc_html($author_name); ?></h2>
+											<?php endif; ?>
+											<?php if ($author_link) : ?>
+												<a class="readon solid yellow" href="<?php echo esc_url($author_link); ?>">Get in touch</a>
+											<?php endif; ?>
+										</div>
+									</div>
+								</div>
+							<?php
+							endif;
+							?>
+							<p class="flexBox justifyCenter p-t-small"><a href="<?php echo home_url(); ?>/insights" class="readon solid blue">Back to Insights</a></p>
+						</div><!-- .entry-content -->
+
+						<footer class="entry-footer">
+
+							<?php
+							wp_link_pages(
+								array(
+									'before' => '<div class="page-links">' . __('Pages:', 'understrap'),
+									'after'  => '</div>',
+								)
+							);
+							?>
+
+						</footer><!-- .entry-footer -->
+
+					</div><!-- .row -->
+
+				</div><!-- #content -->
+
+			</div><!-- #single-wrapper -->
+
+		</article><!-- #post-## -->
+
+		<div class="wrapper-links">
+
+			<?php // get_template_part( 'section-templates/section', 'related' ); 
+			?>
+
+			<?php // understrap_post_nav(); 
+			?>
+
+		</div>
+	</main><!-- #main -->
+
+<?php endwhile; // end of the loop. 
+?>
+
+<?php get_footer(); ?>

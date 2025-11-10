@@ -1,0 +1,51 @@
+/* ACCORDIAN */
+.acc {width: 100%;}
+.acccard {position: relative; overflow: hidden; background: #fffefc; box-sizing: border-box; margin-bottom: 15px; border: solid 2px #ffc500; padding: 30px;}
+.acctitle h4 {color:#58584e; margin: 0; font-size: 20px; max-width: 700px; width: calc(85% - 10px);}
+.acctitle {cursor: pointer; display: inline-flex; position: relative; text-align: left; transition: all .1s ease-in-out; align-items: center; width: 100%; box-sizing: border-box;}
+.acctitle h4:after {content: "\f078"; font-family: 'Font Awesome 5 Pro'; position: absolute; right: 0; top: 0; font-weight: 500; color: #ffc500; padding: 15px; top: 50%; transform: translateY(-50%); font-size: 20px;}
+.accpanel {display: none; margin: 0; text-align: left; padding-top: 25px;}
+.accpanel p {color: #58584e;}
+.accpanel li {margin: 10px 0 0;}
+.acctitle img {width: auto; height: 50px; margin-right: 20px;}
+.accordion-block-wrapper {max-width: 900px; margin: 0 auto; box-sizing: border-box; width: 100%;}
+.ac-block-text {width: 100%;}
+.ac-block-accordion-container {width: 100%;}
+.accordion-block-wrapper h2 {text-align: center; max-width: 700px; margin: 0 auto; margin-bottom: 50px;}
+
+@media (max-width:1300px){
+	.acctitle h4 {max-width: 600px;}
+}
+
+@media (max-width:1175px){
+    .acctitle::after {right: -15px;}
+    .acctitle h4 {max-width: 500px;}
+}
+
+@media (max-width:991px){
+    .acctitle h4 {max-width: unset; font-size: 20px!important; line-height: 30px!important;}
+    }
+
+    @media (max-width:850px){
+        .acctitle h4 {max-width: 500px;}
+        .acccard {padding: 20px;}
+        .acctitle::after {font-size: 16px;}
+    }
+
+    @media (max-width:800px) {
+        .accordion-block-wrapper:not(.obs-faq .accordion-block-wrapper) {box-sizing: border-box; padding-left: 25px; padding-right: 25px;}
+    }
+
+    @media (max-width:650px) {
+        .acctitle h4 {max-width: 400px;}
+    }
+
+    @media (max-width:500px) {
+        .acctitle h4 {max-width: 300px; width: calc(85% - 10px);}
+        .acctitle::after {right: 0; width: calc(15% - 10px);}
+        .acccard {padding: 15px;}
+    }
+
+    @media (max-width: 400px) {
+        .acctitle h4 {font-size: 18px!important; line-height: 28px!important;}
+    }

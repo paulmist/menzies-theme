@@ -32,7 +32,8 @@ function browserSyncReload(done) {
 //Watch
 function watchFiles(){
 	gulp.watch("css/custom.scss", scss);
-	// gulp.watch("style/*.scss", scss);
+	gulp.watch("css/theme.scss", scss);
+	gulp.watch("css/*.scss", scss);
 	gulp.watch("./js/*.js").on('change', browsersync.reload);
 	gulp.watch("./*.php").on('change', browsersync.reload);
 	gulp.watch("template-parts/**/*.php").on('change', browsersync.reload);
@@ -40,7 +41,7 @@ function watchFiles(){
 
 function scss(){
 	return gulp
-	.src("css/custom.scss")
+	.src(["css/custom.scss", "css/theme.scss"])
 	.pipe(sourcemaps.init())
 	.pipe(sass({
 		style: 'compressed',
@@ -50,7 +51,8 @@ function scss(){
 		zindex: false,
 		autoprefixer: {browsers: supported, add: true}
 	}))
-	.pipe(rename('custom.min.css'))
+	// .pipe(rename('custom.min.css'))
+	.pipe(rename({ suffix: '.min' }))
 	.pipe(sourcemaps.write())
 	.pipe(gulp.dest("css/"))
 	.pipe(notify("Compiled: <%= file.relative %>"))

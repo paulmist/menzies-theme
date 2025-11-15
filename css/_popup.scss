@@ -1,0 +1,143 @@
+
+
+.pum-container {
+    top: auto !important;
+    bottom: 20px !important;  /* distance from bottom */
+}
+.pum-close{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.pum-content .wpcf7-form{
+	margin: 0;
+	padding: 0;
+
+	background-color: transparent;
+
+	.wpcf7-submit{
+		&:hover{
+			background-color: var(--dark);
+		}
+	}
+
+	.wpcf7-radio{
+		display: flex;
+		flex-direction: column;
+
+		margin: 0 0 8px 0;
+
+		.wpcf7-list-item{
+			display: block;
+			margin: 0 0 4px;
+			padding: 4px;
+
+			border-radius: calc(infinity * 1px);
+			background-color: rgba(0, 0, 0, 0.2);
+
+			&:hover{
+				cursor: pointer;
+			}
+		}
+
+		.wpcf7-list-item-label{
+			display: block;
+		}
+
+		label{
+			display: flex;
+			align-items: center;
+
+			margin: 0;
+			padding: 0;
+
+			color: #fff !important;
+
+			&:hover{
+				cursor: pointer;
+			}
+
+			input[type="radio"]{
+				// -webkit-appearance: none;
+				// appearance: none;
+
+				margin: 0 4px 0 0;
+				width: 20px;
+				  height: 20px !important;
+				  accent-color: var(--yellow);
+				  border: none;
+			}
+		}
+	}
+
+	.uacf7-buttons{
+		margin: 0;
+		display: flex;
+		justify-content: flex-start;
+		gap: 8px;
+	}
+	.uacf7-prev,
+	.uacf7-next{
+		margin: 0 !important;
+		padding: 12px 16px;
+
+		font-family: inherit;
+		font-size: 13px;
+		letter-spacing: 1px;
+		font-weight: 600;
+		text-transform: uppercase;
+		color: #fff;
+		background-color: var(--dark);
+
+		border: none;
+
+		transition: all 0.3s ease-in-out;
+
+		&:hover{
+			cursor: pointer;
+			background-color: var(--yellow);
+		}
+
+		.step-end &{
+			display: none;
+		}
+	}
+	.uacf7-prev{
+		display: none;
+	}
+	.form-message{
+		p{
+			font-family: inherit;
+			font-size: 14px;
+		}
+	}
+}
+.form-input--radio-group label{
+	margin-bottom: 16px;
+}
+.form-input--textarea{
+	margin: 0 0 16px 0;
+}
+.form-input--textarea textarea.wpcf7-textarea{
+	font-size: 14px;
+	height: 100px !important;
+}
+.form-input--submit{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	margin: 0 0 8px 0;
+
+	.wpcf7-spinner{
+		margin: 0;
+		padding: 0;
+	}
+}
+.pum-content .wpcf7-response-output{
+	margin: 4px 0 0 0!important;
+	padding: 8px 8px 10px 8px !important;
+
+	text-align: center;
+	font-size: 13px;
+}

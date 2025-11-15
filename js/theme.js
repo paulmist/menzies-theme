@@ -142,11 +142,23 @@
 
       if (!selector || selector === '#') {
         var hrefAttr = element.getAttribute('href');
-        selector = hrefAttr && hrefAttr !== '#' ? hrefAttr.trim() : '';
+
+        // Only treat href as a selector if it starts with '#' (e.g. "#myModal")
+        if (hrefAttr && hrefAttr.startsWith('#')) {
+          selector = hrefAttr.trim();
+        } else {
+          selector = null;
+        }
       }
 
-      return selector && document.querySelector(selector) ? selector : null;
+      // Validate selector before querying
+      try {
+        return selector && document.querySelector(selector) ? selector : null;
+      } catch (e) {
+        return null;  // Invalid selector (e.g. "/services/") → safely ignore
+      }
     },
+
     getTransitionDurationFromElement: function getTransitionDurationFromElement(element) {
       if (!element) {
         return 0;

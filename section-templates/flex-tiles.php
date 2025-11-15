@@ -131,9 +131,19 @@ if (!empty($block['align'])) {
                                 <?php if (get_sub_field('cta_tile')) { ?>
 
                                     <a href="<?php echo get_sub_field('flex_tiles_tile_link'); ?>" class="cta-tile cta-bg-<?php echo esc_html(get_sub_field('flex_tiles_tile_background_colour')); ?>" style="background-color: var(--<?php echo esc_html(get_sub_field('flex_tiles_tile_background_colour')); ?>);">
-                                        <?php echo '<h3>' . get_sub_field('flex_tiles_tile_title') . '</h3>'; ?>
-                                        <?php echo '<p>' . get_sub_field('flex_tiles_cta_introduction') . '</p>'; ?>
-                                        <?php echo '<p class="readon outline white">' . get_sub_field('flex_tiles_cta_button') . '</p>'; ?>
+                                        <!-- <?php echo '<h3>' . get_sub_field('flex_tiles_tile_title') . '</h3>'; ?> -->
+                                        <div class="cta-tile__inner" style="background-color: var(--<?php echo esc_html(get_sub_field('flex_tiles_tile_background_colour')); ?>);">
+                                            <div class="cta-tile__title">
+                                                
+                                            <?php echo '<h3>' . get_sub_field('flex_tiles_tile_title') . '</h3>'; ?>
+                                            </div>
+                                            <div class="cta-tile__details" style="background-color: var(--<?php echo esc_html(get_sub_field('flex_tiles_tile_background_colour')); ?>);">
+                                                
+                                            <?php echo '<p>' . get_sub_field('flex_tiles_cta_introduction') . '</p>'; ?>
+                                            <?php echo '<p class="readon outline white">' . get_sub_field('flex_tiles_cta_button') . '</p>'; ?>
+                                            </div>
+                                        </div>
+                                        
                                     </a>
 
                                 <?php } else { ?>

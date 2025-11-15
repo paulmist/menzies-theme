@@ -14,11 +14,12 @@ if ($query->have_posts()) : ?>
         if (get_post_type() !== 'people') {
             continue;
         }
+        $name = get_the_title();
         $thumbnail = get_field('thmbnail');
         $position = get_field('position');
         $permalink = get_permalink();
         ?>
-        <div class="people-tile">
+        <div class="people-tile" >
             <article class="people-tile-inner">
                 <a href="<?php echo esc_url($permalink); ?>" class="people-tile-image">
                     <?php
@@ -37,7 +38,7 @@ if ($query->have_posts()) : ?>
                         <?php endif; ?>
                     </a>
                     <div class="people-links">
-                        <span data-target="contact_popup" class="people-contact-link toggle">Get in touch</span>
+                        <span data-target="contact_popup" data-person-name="<?php the_title(); ?>" class="people-contact-link toggle">Get in touch</span>
                         <?php
                         $related_office = get_field('related_office');
                         if ($related_office) :

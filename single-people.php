@@ -55,7 +55,7 @@ $container = get_theme_mod('understrap_container_type');
 								?>
 									<p>
 										<a class="location" href="<?php echo esc_url($office_link); ?>"><?php echo esc_html($office_title); ?></a>
-										<a class="email person-contact-item toggle" data-target="contact_popup" href="#">Email me</a>
+										<a class="email person-contact-item toggle" data-target="contact_popup" data-person-name="<?php the_title(); ?>" href="#">Email me</a>
 
 										<?php if (get_field('phone')) : ?>
 											<a class="only-mobile telephone person-contact-item" href="tel:<?php the_field('phone'); ?>">Call me</a>

@@ -1,3 +1,4 @@
+@use "_popup";
 .dropdown-menu {
 	position: absolute;
 	top: 100%;
@@ -4759,7 +4760,8 @@ th.column-3 {position: relative;}
     .authors-block.third-width .author .author__details:not(.authors-block .full-width-item.author .author__details) {padding: 0;}
     .post-template-default .pageHeader > div h1, .awards-template-default .pageHeader > div h1, .events-template-default .pageHeader > div h1, .advice-template-default .pageHeader > div h1 {font-size: 50px!important;}
     .pagination {margin-top: 0;}
-    .sectors-section-grid .column > a.cta-tile {min-height: 280px;}
+    // .sectors-section-grid .column > a.cta-tile {min-height: 280px;}
+    .sectors-section-grid .column > a.cta-tile {min-height: 125px;}
     .sectors-section-grid .column > a:not(.cta-tile) {min-height: 125px;}
 }
 
@@ -4917,8 +4919,11 @@ th.column-3 {position: relative;}
     .cta-banner-graphics #shape-group-one {display: none;}
     .cta-banner-wrapper {min-height: 350px;}
     .home-header-graphic.box.home-header-graphic-inner {right: -150px;}
-    .sectors-section-grid .column {width: calc(50% - 25px);}
-    .sectors-section-grid .column > a.cta-tile {display: none;}
+	.sectors-section-grid .column {
+		width: calc(50% - 25px);
+		// margin: 0 0 25px 0;
+	}
+    // .sectors-section-grid .column > a.cta-tile {display: none;}
     .sectors-section-grid .column:last-child {width: 100%; display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-between; margin-top: 30px;}
     .sectors-section-grid .column:last-child a {width: calc(50% - 25px);}
     .office-location-container li {width: calc(50% - 20px);}
@@ -4938,7 +4943,11 @@ th.column-3 {position: relative;}
     .rps-left-side, .rps-right-side {width: 100%;}
     .rps-left-side {margin-bottom: 20px;}
     .sectors-call-out-image {width: 40%;}
-    .sectors-section-grid:not(.pop-flex-tiles-container) {flex-direction: column; flex-wrap: wrap;}
+    // .sectors-section-grid:not(.pop-flex-tiles-container) {flex-direction: column; flex-wrap: wrap;}
+	.sectors-section-grid:not(.pop-flex-tiles-container) {
+		// flex-direction: column;
+		flex-wrap: wrap;
+	}
     .standard-flex-tile {flex: 1;}
     .standard-flex-tile:nth-child(3) {flex-direction: 1; margin: unset;}
     .page-template-template-people .searchandfilter ul li:not(.sf-field-reset) {width: 100%;}

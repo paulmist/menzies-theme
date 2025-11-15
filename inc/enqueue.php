@@ -30,8 +30,11 @@ if ( ! function_exists( 'understrap_scripts' ) ) {
 
 		
 
-		$js_version = $theme_version . '.' . filemtime( get_template_directory() . '/js/theme.min.js' );
-		wp_enqueue_script( 'understrap-scripts', get_template_directory_uri() . '/js/theme.min.js', array(), $js_version, true );
+		$js_version = $theme_version . '.' . filemtime( get_template_directory() . '/js/theme.js' );
+		wp_enqueue_script( 'understrap-scripts', get_template_directory_uri() . '/js/theme.js', array(), null, true );
+		wp_enqueue_script( 'team-contact-forms', get_template_directory_uri() . '/js/team-contact-forms.js', array('jquery'), null, true );
+		wp_enqueue_script( 'dolia', get_template_directory_uri() . '/js/dolia.js', array('jquery'), null, true );
+		// wp_enqueue_script( 'popup-feedback', get_template_directory_uri() . '/js/popup-feedback.js', array('jquery'), null, true );
 
 		wp_enqueue_script( 'modernizr', get_template_directory_uri() . '/js/modernizr.min.js', array(), $js_version, true );
 

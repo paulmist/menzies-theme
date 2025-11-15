@@ -85,6 +85,8 @@ if ($(window).width() < 768) {
    $(".filter-toggle").addClass("collapsed");
 }
 
+
+
 });
 
 $(document).on('shown.bs.collapse', function() {

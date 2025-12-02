@@ -1,4 +1,6 @@
 jQuery(document).ready(function($) {
+	console.log("Contact Forms init");
+
 	// Contact Links
 	function init_contact_links(){
 		$('.people-contact-link').on('click', function(e) {
